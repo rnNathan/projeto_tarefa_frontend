@@ -7,7 +7,9 @@ import { TestComponent } from './test/test.component';
 
 
 @NgModule({
-  declarations: [TestComponent],
+  declarations: [TestComponent
+
+  ],
   imports: [
     CommonModule,
     FormsModule,

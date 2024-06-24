@@ -47,5 +47,13 @@ export class TarefaService {
   public consultarItensDaTarefa(idTarefa: number): Observable<Array<ItemTarefa>> {
     return this.httpClient.get<Array<ItemTarefa>>(this.API + '/listar-itens/' + idTarefa);
   }
+
+  public contarTotalRegistro(seletor:TarefaSeletor):Observable<number>{
+    return this.httpClient.post<number>(this.API + '/contar',seletor);
+  }
+
+  public contarPaginas(seletor: TarefaSeletor):Observable<number> {
+    return this.httpClient.post<number>(this.API + '/contar-pagina', seletor);
+  }
   
 }

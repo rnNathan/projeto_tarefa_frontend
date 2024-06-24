@@ -3,7 +3,6 @@ import { Tarefa } from '../../shared/model/tarefa';
 import { ItemTarefa } from '../../shared/model/itemTarefa';
 import { TarefaSeletor } from '../../shared/model/seletor/tarefaSeletor';
 import { TarefaService } from '../../shared/service/tarefa.service';
-import { UsuarioService } from '../../shared/service/usuario.service';
 import { ItemTarefaService } from '../../shared/service/itemTarefa.service';
 
 import { Usuario } from '../../shared/model/usuario';
@@ -26,16 +25,21 @@ export class TestComponent implements OnInit {
   public readonly TAMANHO_PAGINA: number = 0;
   public showForm: boolean = false;
   public isTemplate: boolean = false;
-  itemTarefa: ItemTarefa;
+  public item: ItemTarefa = new ItemTarefa();
+
+
+
 
   constructor(
     private tarefaService: TarefaService,
-    private usuarioService: UsuarioService,
     private itemTarefaService: ItemTarefaService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.pesquisar();
+    this.seletor.limite = this.TAMANHO_PAGINA;
+    this.seletor.pagina = 1;
 
   }
 
@@ -135,4 +139,51 @@ export class TestComponent implements OnInit {
     this.router.navigate(['/item/detalhe/', item]);
   }
 
+
+  public contarPaginas() {
+    this.tarefaService.contarPaginas(this.seletor).subscribe(
+      resultado => {
+        this.totalPaginas = resultado;
+      },
+      erro => {
+        Swal.fire('Erro ao consultar total de páginas', erro.error.mensagem, 'error');
+      }
+    );
+  }
+
+  atualizarPaginacao() {
+    this.contarPaginas();
+    this.pesquisar();
+  }
+
+  avancarPagina() {
+    this.seletor.pagina++;
+    this.pesquisar();
+  }
+
+  voltarPagina() {
+    this.seletor.pagina--;
+    this.pesquisar();
+  }
+
+  irParaPagina(indicePagina: number) {
+    this.seletor.pagina = indicePagina;
+    this.pesquisar();
+  }
+  criarArrayPaginas(): any[] {
+    return Array(this.totalPaginas).fill(0).map((x, i) => i + 1);
+  }
+
+  public adicionarItem(): void {
+    this.itemTarefaService.inserir(this.item).subscribe(
+      (resposta) => {
+        this.item = resposta;
+        Swal.fire('Item salvo com sucesso!', '', 'success');
+        this.voltar();
+      },
+      (erro) => {
+        Swal.fire('Erro ao salvar um item!', erro, 'error');
+      }
+    );
+  }
 }

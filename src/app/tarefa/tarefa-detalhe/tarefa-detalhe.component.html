@@ -12,10 +12,17 @@
                         <input  [ngClass]="validarNome()" type="text" id="nome" class="form-control custom-border"
                         minlength="5" name="nomeTarefa" [(ngModel)]="tarefa.nomeTarefa" required/>
                     </div>
-                    <div class="col-md-5 ">
+
+                    <div class="col-md-5">
+                        <label for="nome">Categoria:</label>
+                        <select class="form-control custom-border" name="tipoTarefa" [(ngModel)]="tarefa.tipoTarefa" required>
+                            <option *ngFor="let tipo of tiposTarefa" [ngValue]="tipo">{{ tipo }}</option>
+                        </select>
+                    </div>
+                    <!-- <div class="col-md-5 ">
                         <label for="nome">Tipo da tarefa:</label>
                         <input type="text" id="nome" class="form-control" name="tipoTarefa" [(ngModel)]="tarefa.tipoTarefa" required>
-                    </div>
+                    </div> -->
                     <!-- Campo de seleção de usuário, mostrado apenas em Nova tarefa -->
                     <div class="col-md-5" *ngIf="!idTarefa">
                         <label for="nome">Usuário:</label>

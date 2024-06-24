@@ -1,5 +1,5 @@
 export class BaseSeletor {
     pagina: number;
-      limite: number;
+    limite: number;
   }
   

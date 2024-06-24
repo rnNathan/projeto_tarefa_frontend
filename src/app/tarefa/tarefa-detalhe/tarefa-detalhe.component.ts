@@ -27,6 +27,7 @@ export class TarefaDetalheComponent implements OnInit {
   @ViewChild('ngForm')
   public ngForm: NgForm;
 
+  public tiposTarefa: string[] = ['Estudar', 'Rancho', 'Compra semanal', 'Exercício', 'Diários'];
 
   constructor(
     private tarefaService: TarefaService,
