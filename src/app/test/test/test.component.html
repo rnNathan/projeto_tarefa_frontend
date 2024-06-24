@@ -85,7 +85,7 @@
             <h2>{{ tarefa.tipoTarefa }}</h2>
           </div>
           <div class="col-md-4">
-            <button class="tarefaIcons btn btn-sm" (click)="excluir(tarefa)" style=" margin-left: 20px; " [ngClass]="{
+            <button class="tarefaIcons btn btn-sm" (click)="excluir(tarefa)" style=" margin-left: 20px; margin-top: 10px;" [ngClass]="{
               'estudar1': tarefa.tipoTarefa === 'Estudar',
               'rancho2': tarefa.tipoTarefa === 'Rancho',
               'compra3': tarefa.tipoTarefa === 'Compra',
