@@ -131,8 +131,9 @@
       <div class="card-body">
         <li class="list-group-item">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Novo item" [(ngModel)]="item.descricao">
-              <button class="btn btn-outline-secondary" type="button" (click)="adicionarItem()"><i class="bi bi-plus-circle"></i></button>
+              <button class="btn btn-outline-secondary" type="button" (click)="adicionarItem(tarefa)"><i class="bi bi-plus-circle"></i></button>
+              <input type="text" class="form-control" placeholder="Novo item" [(ngModel)]="novoItem.descricao" *ngIf="tarefa.criandoItem">
+              <button class="btn btn-outline-secondary" type="button" (click)="salvarItem(tarefa.idTarefa)"><i class="bi bi-check-circle"></i></button>
             </div>
           </li>
           <ul class="list-group list-group-flush">

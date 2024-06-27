@@ -25,7 +25,7 @@ export class TestComponent implements OnInit {
   public readonly TAMANHO_PAGINA: number = 0;
   public showForm: boolean = false;
   public isTemplate: boolean = false;
-  public item: ItemTarefa = new ItemTarefa();
+  public novoItem: ItemTarefa = new ItemTarefa();
 
 
 
@@ -43,7 +43,25 @@ export class TestComponent implements OnInit {
 
   }
 
-  private consultarTodasTarefas() {
+  public adicionarItem(tarefa: Tarefa): void {
+    tarefa.criandoItem = true;
+  }
+
+  public salvarItem(idTarefa: number): void {
+    this.novoItem.idTarefa = idTarefa;
+    this.itemTarefaService.inserir(this.novoItem).subscribe(
+      (resposta) => {
+        this.novoItem = resposta;
+        Swal.fire('Item salvo com sucesso!', '', 'success');
+        this.voltar();
+      },
+      (erro) => {
+        Swal.fire('Erro ao salvar um item!', erro, 'error');
+      }
+    );
+  }
+
+  /*private consultarTodasTarefas() {
     this.tarefaService.consultarTodos().subscribe(
       (resultado) => {
         this.tarefas = resultado;
@@ -52,7 +70,7 @@ export class TestComponent implements OnInit {
         console.error('erro ao consultar todas as tarefas', erro);
       }
     );
-  }
+  }*/
 
   public pesquisar() {
     this.tarefaService.consultarPorFiltro(this.seletor).subscribe(
@@ -174,16 +192,4 @@ export class TestComponent implements OnInit {
     return Array(this.totalPaginas).fill(0).map((x, i) => i + 1);
   }
 
-  public adicionarItem(): void {
-    this.itemTarefaService.inserir(this.item).subscribe(
-      (resposta) => {
-        this.item = resposta;
-        Swal.fire('Item salvo com sucesso!', '', 'success');
-        this.voltar();
-      },
-      (erro) => {
-        Swal.fire('Erro ao salvar um item!', erro, 'error');
-      }
-    );
-  }
 }
