@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-md-5 ">
                         <label for="nome">Tarefa associada: </label>
-                        <select class="form-control" name="nomeVacina"  [(ngModel)]="item.idTarefa" required>
+                        <select class="form-control" name="nomeVacina"  [(ngModel)]="item.tarefa" required>
                             @for (item of tarefas; track item.idTarefa) {
                             <option [ngValue]="item">{{ item.nomeTarefa }}</option>
                             }
