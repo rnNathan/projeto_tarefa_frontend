@@ -5,7 +5,8 @@ export class Usuario {
     cpf: string;
     dataNascimento: Date;
     email: string;
-    login: string;
-    senha: string;
+    //senha: string;
+    perfil: string;
+    idSessao: string;
 
 }

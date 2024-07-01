@@ -2,7 +2,7 @@ import { Tarefa } from "./tarefa";
 
 export class ItemTarefa {
     idItem: number;
-	tarefa: Tarefa;
+	idTarefa: number;
 	descricao: string;
 	realizado: boolean;
 

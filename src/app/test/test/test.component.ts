@@ -27,7 +27,7 @@ export class TestComponent implements OnInit {
   public showForm: boolean = false;
   public isTemplate: boolean = false;
   public tarefa: Tarefa = new Tarefa();
-  public item: ItemTarefa = new ItemTarefa();
+  public novoItem: ItemTarefa = new ItemTarefa();
 
   constructor(
     private tarefaService: TarefaService,
@@ -42,27 +42,20 @@ export class TestComponent implements OnInit {
     this.pesquisar();
     this.seletor.limite = this.TAMANHO_PAGINA;
     this.seletor.pagina = 1;
-
-    this.route.params.subscribe(params => {
-      this.idTarefa = params['id'];
-      console.log('ID da Tarefa:', this.idTarefa);
-
-      // Chame o método para buscar os itens da tarefa, se necessário
-      if (this.idTarefa) {
-        this.buscarItem();
-      }
-    });
-
   }
 
-  public inserir(idTarefaSelecionada: number): void {
+  public adicionarItem(tarefa: Tarefa): void {
+    tarefa.criandoItem = true;
+  }
 
-    this.router.navigate(['/tarefa/:id', idTarefaSelecionada]);
-    this.itemTarefaService.inserir(this.item).subscribe(
+  public salvarItem(idTarefa: number): void {
+    this.novoItem.idTarefa = idTarefa;
+    this.itemTarefaService.inserir(this.novoItem).subscribe(
       (resposta) => {
-        this.item = resposta;
+        this.novoItem = resposta;
         Swal.fire('Item salvo com sucesso!', '', 'success');
-        this.voltar();
+        this.novoItem.descricao = '';
+        this.pesquisar();
       },
       (erro) => {
         Swal.fire('Erro ao salvar um item!', erro, 'error');
@@ -71,9 +64,9 @@ export class TestComponent implements OnInit {
   }
 
   public buscarItem(): void {
-    this.itemTarefaService.consultarPorId(this.item.idItem).subscribe(
+    this.itemTarefaService.consultarPorId(this.novoItem.idItem).subscribe(
       (item) => {
-        this.item = item;
+        this.novoItem = item;
       },
       (erro) => {
         Swal.fire('Erro ao buscar um item!', erro, 'error');

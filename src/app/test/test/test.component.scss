@@ -79,7 +79,7 @@ h5 {
 }
 
 .tarefaIcons:hover {
-    background-color: #e9e9e9; /* Cor de fundo ao passar o mouse */
+    background-color: #ebebeb; /* Cor de fundo ao passar o mouse */
 }
 
 .excluir {
@@ -116,5 +116,9 @@ h5 {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: italic;
+  }
+
+  .add:hover {
+    background-color: #ebedff; 
   }
   

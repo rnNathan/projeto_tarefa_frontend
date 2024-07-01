@@ -10,5 +10,8 @@ export class Tarefa {
   realizado: boolean;
   isTemplate: boolean = false; 
   expanded: boolean;
+
+  //transiente, usado apenas na tela.
+  criandoItem: boolean = false
   
 }
