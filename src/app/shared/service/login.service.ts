@@ -9,7 +9,7 @@ import { UsuarioDTO } from '../model/DTO/usuario.DTO';
 })
 export class LoginService {
 
-  private readonly API = 'http://localhost:8080//rest/login';
+  private readonly API = 'http://localhost:8080/backend_projeto_tarefa/rest/login';
   
   constructor(private httpClient: HttpClient) { }
 

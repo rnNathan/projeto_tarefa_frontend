@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     let usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
-
     if(usuarioNoStorage){
       this.usuarioAutenticado = JSON.parse(usuarioNoStorage);
     } else {

@@ -1,18 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, inject } from '@angular/core';
 import { Usuario } from '../../shared/model/usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../shared/service/usuario.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
-  selector: 'app-usuario-detalhe',
+  selector: 'app-login-cadastro',
   //standalone: true,
   //imports: [],
-  templateUrl: './usuario-detalhe.component.html',
-  styleUrl: './usuario-detalhe.component.scss'
+  templateUrl: './login-cadastro.component.html',
+  styleUrl: './login-cadastro.component.scss'
 })
-export class UsuarioDetalheComponent implements OnInit{
+export class LoginCadastroComponent implements OnInit{
 
   public usuarios: Usuario[] = new Array();
   public usuario: Usuario = new Usuario();
@@ -45,11 +46,11 @@ export class UsuarioDetalheComponent implements OnInit{
   }
 
   public inserir(): void {
+
     this.usuarioService.inserir(this.usuario).subscribe(
-      (resposta) => {
-        this.usuario = resposta;
+      (usuarioAutenticado: Usuario) => {
         Swal.fire('Usuário cadastrado com sucesso!', '', 'success');
-        this.voltar();
+        this.router.navigate(['/login/']);
       },
       (erro) => {
         Swal.fire('Erro ao cadastrar um usuário!', erro.error.mensagem, 'error');
@@ -84,7 +85,7 @@ export class UsuarioDetalheComponent implements OnInit{
   }
 
   public voltar() {
-    this.router.navigate(['/tarefa/']);
+    this.router.navigate(['/login/']);
   }
 
   public compareById(r1: any, r2: any): boolean {

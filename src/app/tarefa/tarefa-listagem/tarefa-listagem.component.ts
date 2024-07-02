@@ -101,7 +101,7 @@ export class TarefaListagemComponent implements OnInit{
   }
 
   public voltar() {
-    this.router.navigate(['/tarefa/']);
+    this.router.navigate(['/home/']);
   }
 
   toggleExpanded(tarefa: Tarefa): void {

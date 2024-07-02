@@ -3,7 +3,7 @@ import { ItemTarefa } from "./itemTarefa";
 
 export class Tarefa {
   idTarefa: number;
-  usuario: Usuario;
+  idUsuario: number;
   nomeTarefa: string;
   tipoTarefa: string;
   itensTarefa: ItemTarefa[] = [];

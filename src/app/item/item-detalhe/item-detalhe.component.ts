@@ -75,7 +75,7 @@ export class ItemDetalheComponent implements OnInit{
   }
 
   public voltar() {
-    this.router.navigate(['/tarefa/']);
+    this.router.navigate(['/home/']);
   }
 
   public inserir(): void {

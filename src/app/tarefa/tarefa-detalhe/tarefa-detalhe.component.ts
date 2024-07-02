@@ -22,6 +22,9 @@ export class TarefaDetalheComponent implements OnInit {
   public tarefa: Tarefa = new Tarefa();
   public idTarefa: number;
   public usuarios: Array<Usuario> = new Array();
+  public novaTarefa: Tarefa = new Tarefa();
+
+
 
 
   @ViewChild('ngForm')
@@ -43,8 +46,6 @@ export class TarefaDetalheComponent implements OnInit {
         this.buscarTarefa();
       }
     });
-
-    this.consultarTodosUsuarios()
   }
 
   public salvar(): void {
@@ -55,7 +56,23 @@ export class TarefaDetalheComponent implements OnInit {
     }
   }
 
+  private getUsuarioId(): number {
+    // Implemente a lógica para obter o id do usuário
+    // Pode ser de um serviço de autenticação, ou de outra fonte
+    return 1; // Exemplo: substitua isso pela lógica real
+  }
+
   public inserir(): void {
+
+    const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
+    if (usuarioNoStorage) {
+      const usuarioAutenticado = JSON.parse(usuarioNoStorage);
+      this.tarefa.idUsuario = usuarioAutenticado.idUsuario; // Atribuindo o id do usuário na tarefa.
+    } 
+    
+    console.log(this.tarefa.criandoItem);
+    console.log('Tarefa antes de enviar para o serviço:', this.tarefa);
+  
     this.tarefaService.inserir(this.tarefa).subscribe(
       (resposta) => {
         this.tarefa = resposta;
@@ -95,7 +112,7 @@ export class TarefaDetalheComponent implements OnInit {
   }
 
   public voltar() {
-    this.router.navigate(['/tarefa/']);
+    this.router.navigate(['/tarefa/lista']);
   }
 
   private consultarTodosUsuarios() {

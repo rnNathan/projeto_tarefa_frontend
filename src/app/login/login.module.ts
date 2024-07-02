@@ -5,10 +5,12 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from '../auth/request.interceptor';
+import { LoginCadastroComponent } from './login-cadastro/login-cadastro.component';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    LoginCadastroComponent
   ],
   imports: [
     CommonModule,
@@ -17,8 +19,6 @@ import { RequestInterceptor } from '../auth/request.interceptor';
     FormsModule
   ],
 
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
-  ],
+ 
 })
 export class LoginModule { }

@@ -8,5 +8,7 @@ import { RequestInterceptor17 } from './auth/request17.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([RequestInterceptor17]))]
+    provideHttpClient(withInterceptors([RequestInterceptor17])),
+    provideHttpClient(withFetch())
+  ]
 };

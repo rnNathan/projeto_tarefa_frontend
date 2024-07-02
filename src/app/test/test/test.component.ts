@@ -39,7 +39,6 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.pesquisar();
     this.seletor.limite = this.TAMANHO_PAGINA;
     this.seletor.pagina = 1;
   }
@@ -84,6 +83,13 @@ export class TestComponent implements OnInit {
     );
   }
   public pesquisar() {
+
+    const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
+    if (usuarioNoStorage) {
+      const usuarioAutenticado = JSON.parse(usuarioNoStorage);
+      this.seletor.idUsuario = usuarioAutenticado.idUsuario; 
+    } 
+    console.log(this.seletor.idUsuario);
     this.tarefaService.consultarPorFiltro(this.seletor).subscribe(
       (resultado) => {
         this.tarefas = resultado;
@@ -129,7 +135,7 @@ export class TestComponent implements OnInit {
   }
 
   public voltar() {
-    this.router.navigate(['/tarefa/']);
+    this.router.navigate(['/home/']);
   }
 
   toggleExpanded(tarefa: Tarefa): void {
