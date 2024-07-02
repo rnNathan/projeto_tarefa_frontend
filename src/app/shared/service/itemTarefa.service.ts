@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ItemTarefaService {
 
-  private readonly API = 'http://localhost:8080/backend_projeto_tarefa/rest/item';
+  private readonly API = 'http://localhost:8080/backend_projeto_tarefa/rest/restrito/item';
 
   constructor(private httpClient: HttpClient) { }
 

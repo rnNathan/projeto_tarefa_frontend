@@ -11,7 +11,7 @@ import { ItemTarefa } from '../model/itemTarefa';
 })
 export class TarefaService {
 
-  private readonly API = 'http://localhost:8080/backend_projeto_tarefa/rest/tarefa';
+  private readonly API = 'http://localhost:8080/backend_projeto_tarefa/rest/restrito/tarefa';
 
   constructor(private httpClient: HttpClient) { }
 
