@@ -59,30 +59,27 @@ export class TarefaDetalheComponent implements OnInit {
   private getUsuarioId(): number {
     // Implemente a lógica para obter o id do usuário
     // Pode ser de um serviço de autenticação, ou de outra fonte
+    const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
+
     return 1; // Exemplo: substitua isso pela lógica real
   }
 
   public inserir(): void {
-
     const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
     if (usuarioNoStorage) {
       const usuarioAutenticado = JSON.parse(usuarioNoStorage);
       this.tarefa.idUsuario = usuarioAutenticado.idUsuario; // Atribuindo o id do usuário na tarefa.
-    } 
-    
-    console.log(this.tarefa.criandoItem);
-    console.log('Tarefa antes de enviar para o serviço:', this.tarefa);
-  
-    this.tarefaService.inserir(this.tarefa).subscribe(
-      (resposta) => {
-        this.tarefa = resposta;
-        Swal.fire('Tarefa salva com sucesso!', '', 'success');
-        this.voltar();
-      },
-      (erro) => {
-        Swal.fire('Erro ao salvar uma tarefa!', erro, 'error');
-      }
-    );
+      this.tarefaService.inserir(this.tarefa).subscribe(
+        (resposta) => {
+          this.tarefa = resposta;
+          Swal.fire('Tarefa salva com sucesso!', '', 'success');
+          this.router.navigate(['/tarefa/lista']);
+        },
+        (erro) => {
+          Swal.fire('Erro ao salvar uma tarefa!', erro, 'error');
+        }
+      );
+    }
   }
 
   public alterar(): void {

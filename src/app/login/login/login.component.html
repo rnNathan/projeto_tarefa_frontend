@@ -1,10 +1,7 @@
-<div class="container-fluid g-5">
+<div class="fullscreen-container container-fluid g-5" style="background-color: #e7f1fc;">
     <div class="row text-center p-2 align-items-center justify-content-center">
-      <div class="col col-md-4 pt-5">
-        <div class="card border-dark shadow round">
-          <div class="card-header bg-primary">
-            <h3 class="text-center text-white pt-2">Tarefado!</h3>
-          </div>
+      <div class="col col-md-3 pt-5">
+        <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
           <div class="card-body">
             <form #ngForm="ngForm">
               <div class="mb-1">
@@ -13,7 +10,7 @@
                   [ngClass]="(dto.login && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="dto.login"
                   type="text"
-                  class="form-control border-dark"
+                  class="form-control"
                   name="email"
                   required
                 />
@@ -25,19 +22,19 @@
                   [ngClass]="(dto.senha && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
                   [(ngModel)]="dto.senha"
                   type="password"
-                  class="form-control border-dark"
+                  class="form-control"
                   name="senha"
                   required
                 />
                 <div class="invalid-feedback">Informe a senha.</div>
               </div>
               <div class="mb-3 text-center">
-                <a href="#" class="text-primary">Esqueci minha senha</a>
+                <a href="#" class="text-primary"></a>
               </div>
               <div class="text-center">
                 <button
                   type="button"
-                  class="btn btn-primary border-dark"
+                  class="btn btn-primary"
                   (click)="realizarLogin()"
                   [disabled]="!ngForm.valid"
                 >

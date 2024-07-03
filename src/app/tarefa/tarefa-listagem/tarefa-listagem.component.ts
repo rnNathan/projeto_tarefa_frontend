@@ -40,7 +40,6 @@ export class TarefaListagemComponent implements OnInit{
 
   ngOnInit(): void {
     
-
   }
 
   private consultarTodasTarefas() {
@@ -55,6 +54,11 @@ export class TarefaListagemComponent implements OnInit{
   }
 
   public pesquisar() {
+    const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
+    if (usuarioNoStorage) {
+      const usuarioAutenticado = JSON.parse(usuarioNoStorage);
+      this.seletor.idUsuario = usuarioAutenticado.idUsuario; // Atribuindo o id do usuário no filtro.
+    } 
     this.tarefaService.consultarPorFiltro(this.seletor).subscribe(
       (resultado) => {
         this.tarefas = resultado;
