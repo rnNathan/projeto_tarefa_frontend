@@ -1,23 +1,19 @@
 <div class="fullscreen-container">
   <div id="form" class="shadow-lg p-3 mb-5 bg-body-tertiary rounded text-center ">
     <div>
-      <img src="./assets/imagemlogin.jpg" alt="imagem-login" style="width: 200px; height: auto;">
+      <img src="./assets/imagem.png" alt="imagem-login" style="width: 200px; height: auto;">
     </div>
     <form #ngForm="ngForm">
       <h2 class="title">Login</h2>
       <label for="email">Email</label>
       <div>
-        <i class="far fa-envelope"></i>
         <input class="input" [ngClass]="(dto.login && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
-          [(ngModel)]="dto.login" id="email" name="email" placeholder="Email" type="text" style="padding-left: 15px;">
-
+          [(ngModel)]="dto.login" id="email" name="email" placeholder="Insira seu email" type="text" style="padding-left: 15px;">
       </div>
-
       <label for="senha">Senha</label>
       <div>
-        <i class="fas fa-lock"></i>
         <input class="input" [ngClass]="(dto.senha && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
-          [(ngModel)]="dto.senha" id="senha" name="senha" placeholder="Password" type="password"
+          [(ngModel)]="dto.senha" id="senha" name="senha" placeholder="Insira sua senha" type="password"
           style="padding-left: 15px;">
       </div>
 

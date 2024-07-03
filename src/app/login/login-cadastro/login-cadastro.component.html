@@ -1,58 +1,37 @@
-<div class="container">
-    <br>
-    <div class="card">
-        <div class="card-header " style="display: flex; justify-content: center;">
-            <h5>{{ idUsuario ? 'Editar' : 'Novo'}} usuario</h5>
-        </div>
-        <div class="card-body">
-            <form #ngForm="ngForm">
-                <div class="row" >
-                    <div class="col-md-5">
-                        <label for="nome">Nome:</label>
-                        <input  [ngClass]="validarNome()" type="text" id="nome" class="form-control custom-border"
-                        minlength="5" name="nomeUsuario" [(ngModel)]="usuario.nome" required/>
-                    </div>
-                    <div class="col-md-5 ">
-                        <label for="cpf">CPF:</label>
-                        <input type="text" id="cpf" class="form-control" name="cpf" [(ngModel)]="usuario.cpf" required>
-                    </div>
-                    <div class="col-md-5 ">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" class="form-control" name="email" [(ngModel)]="usuario.email" required>
-                    </div>
-                    <div class="col-md-5 ">
-                        <label for="dataNascimento">Data de nascimento:</label>
-                        <input type="date" id="dataNascimento" class="form-control" name="dataNascimento" [(ngModel)]="usuario.dataNascimento" required>
-                    </div>
-                    <div class="col-md-5 ">
-                        <label for="senha">Senha:</label>
-                        <input type="password" id="senha" class="form-control" name="senha" [(ngModel)]="usuario.senha" required>
-                    </div>
-                    <div class="col-md-5 ">
-                        <label for="perfil">Tipo usuário:</label>
-                        <input type="text" id="perfil" class="form-control" name="perfil" [(ngModel)]="usuario.perfil" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-16 form-group">
-                            <label for="btnPesquisar" class="form-label">&nbsp;</label>
-                            <button type="button" class="btn btn-outline-secondary"
-                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                name="btnPesquisar"
-                                (click)="salvar()"
-                                >
-                                Salvar
-                            </button>
-                            <label for="btnVoltar" class="form-label">&nbsp;</label>
-                            <button type="button" class="btn btn-outline-secondary"
-                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                name="btnPesquisar"
-                                (click)="voltar()"
-                                >
-                                Voltar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+<div class="fullscreen-container">
+    <div id="form" class="shadow-lg p-3 mb-5 bg-body-tertiary rounded text-center">
+        <form action="">
+            <div>
+              <img src="./assets/imagem.png" alt="logo" style="width: 200px; height: auto;">
+            </div>
+            <h6 class="title">Criar Conta</h6>
+            <div class="input">
+                <input [ngClass]="validarNome()" type="text" id="nome" class="form-control custom-border"
+                minlength="5" name="nomeUsuario" [(ngModel)]="usuario.nome" placeholder="Nome" required>
+            </div>
+            <div class="input">
+                <input type="email" id="email" class="form-control custom-border"
+                name="email" [(ngModel)]="usuario.email" placeholder="Email" required>
+            </div>
+            <div class="input">
+                <input type="date" id="dtnascimento" class="form-control custom-border"
+                name="dtnascimento" [(ngModel)]="usuario.dataNascimento" required>
+            </div>
+            <div class="input">
+                <input type="cpf" id="cpf" class="form-control custom-border"
+                name="cpf" [(ngModel)]="usuario.cpf" placeholder="CPF" required>
+            </div>
+
+            <div class="input">
+                <input type="password" id="senha" class="form-control custom-border"
+                name="senha" [(ngModel)]="usuario.senha" placeholder="Senha" minlength="5" maxlength="12" required>
+            </div>
+            <div id="btn">
+                <button type="button" class="btn btn-primary" (click)="salvar()">Cadastrar</button>
+            </div>
+        </form>
+        <div class="text">
+            <p>Já possui cadastro?<a href="/login"> ENTRAR</a></p>
         </div>
     </div>
+</div>
