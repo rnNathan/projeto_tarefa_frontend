@@ -1,4 +1,48 @@
-<div class="fullscreen-container container-fluid g-5" style="background-color: #e7f1fc;">
+<div class="fullscreen-container">
+  <div id="form" class="shadow-lg p-3 mb-5 bg-body-tertiary rounded text-center ">
+    <div>
+      <img src="./assets/imagemlogin.jpg" alt="imagem-login" style="width: 200px; height: auto;">
+    </div>
+    <form #ngForm="ngForm">
+      <h2 class="title">Login</h2>
+      <label for="email">Email</label>
+      <div>
+        <i class="far fa-envelope"></i>
+        <input class="input" [ngClass]="(dto.login && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
+          [(ngModel)]="dto.login" id="email" name="email" placeholder="Email" type="text" style="padding-left: 15px;">
+
+      </div>
+
+      <label for="senha">Senha</label>
+      <div>
+        <i class="fas fa-lock"></i>
+        <input class="input" [ngClass]="(dto.senha && ngForm.dirty) ? 'form-control is-invalid' : 'form-control'"
+          [(ngModel)]="dto.senha" id="senha" name="senha" placeholder="Password" type="password"
+          style="padding-left: 15px;">
+      </div>
+
+      <div id="btn">
+        <button type="button" class="btn btn-primary" (click)="realizarLogin()" [disabled]="!ngForm.valid">
+          Entrar
+        </button>
+      </div>
+      <div class="pt-3">
+        <span class="align-items-start">
+          <p class="text-primary">OU</p>
+        </span>
+      </div>
+      <div id="btn">
+        <button type="button" class="btn btn-warning border-dark" (click)="cadastro()">
+          Cadastre-se
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- <div class="fullscreen-container container-fluid g-5" style="background-color: #e7f1fc;">
     <div class="row text-center p-2 align-items-center justify-content-center">
       <div class="col col-md-3 pt-5">
         <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
@@ -56,5 +100,4 @@
         </div>
       </div>
     </div>
-  </div>
-  
+  </div> -->

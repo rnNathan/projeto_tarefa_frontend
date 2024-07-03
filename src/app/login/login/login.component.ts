@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../shared/model/usuario';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-login',
   //standalone: true,
@@ -16,9 +17,11 @@ export class LoginComponent {
 
   public dto: UsuarioDTO = new UsuarioDTO();
 
+
   constructor(private loginService: LoginService, 
               private router: Router){
   }
+
 
   public realizarLogin(){
      this.loginService.autenticar(this.dto).subscribe(
