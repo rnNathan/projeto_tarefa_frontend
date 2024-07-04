@@ -1,70 +1,68 @@
-<div class="container">
-    <br>
-    <div class="card">
-        <div class="card-header ">
-            <h5>{{ idTarefa ? 'Editar' : 'Nova'}} tarefa</h5>
-        </div>
-        <div class="card-body">
-            <form #ngForm="ngForm">
-                <div class="row" >
-                    <div class="col-md-4">
-                        <label for="nome">Nome da tarefa:</label>
-                        <input  [ngClass]="validarNome()" type="text" id="nome" class="form-control custom-border"
-                        minlength="5" name="nomeTarefa" [(ngModel)]="tarefa.nomeTarefa" required/>
-                    </div>
+<div class="fullscreen-container">
+    <div class="container" style="display: flex; justify-content: center;">
+        <div class="card mb-3" style="max-width: 1000px; margin-top: 200px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="./assets/add.jpg" class="img-fluid rounded-start rounded-end" alt="imagemlogin">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <form #ngForm="ngForm" style=" box-shadow: 10px 10px 5px #71a9d6;">
+                            <div class="position-relative">
+                                <button id="btnClose" type="button" class="position-absolute top-0 end-0 btn-close" aria-label="Close" style="outline: none;padding: 15px; box-shadow: none;" (click)="voltar()"></button>
+                            </div>
+                            <div class="row" style="flex-direction: column; margin: 10px 0px 0px 0px;">
+                                <div class="col-md-7">
+                                    <label for="nome" >Nome da tarefa:</label>
+                                    <input style="margin: 0px 0px 10px 0px;" [ngClass]="validarNome()" type="text"
+                                        id="nome" class="form-control custom-border" minlength="5" name="nomeTarefa"
+                                        [(ngModel)]="tarefa.nomeTarefa" required />
+                                </div>
 
-                    <div class="col-md-4">
-                        <label for="nome">Categoria:</label>
-                        <select class="form-control custom-border" name="tipoTarefa" [(ngModel)]="tarefa.tipoTarefa" required>
-                            <option *ngFor="let tipo of tiposTarefa" [ngValue]="tipo">{{ tipo }}</option>
-                        </select>
-                    </div>
-                    <!-- <div class="col-md-5 ">
-                        <label for="nome">Tipo da tarefa:</label>
-                        <input type="text" id="nome" class="form-control" name="tipoTarefa" [(ngModel)]="tarefa.tipoTarefa" required>
-                    </div> -->
-                    <!-- Campo de seleção de usuário, mostrado apenas em Nova tarefa -->
-                   <!--  <div class="col-md-5" *ngIf="!idTarefa">
-                        <label for="nome">Usuário:</label>
-                        <select class="form-control custom-border" name="nomeUsuario" [(ngModel)]="tarefa.usuario" required>
-                            <option *ngFor="let usuario of usuarios" [ngValue]="usuario">{{ usuario.nome }}</option>
-                        </select>
-                    </div> -->
-                    <!-- Fim do campo de seleção de usuário -->
-                    <!-- Condição para exibir checkboxes adicionais apenas na edição -->
-                    <div *ngIf="idTarefa">
-                        <!-- Checkboxes adicionais para edição -->
-                        <div class="col-md-5">
-                            <label>Status:</label><br>
-                            <label>
-                                <input type="checkbox" name="statusConcluido" [(ngModel)]="tarefa.realizado">
-                                Concluído
-                            </label>
-                        </div>
-                    </div>
-                    <!-- Fim da condição para edição -->
-                    <!--  -->
-                    <div class="row">
-                        <div class="col-md-16 form-group">
-                            <label for="btnPesquisar" class="form-label">&nbsp;</label>
-                            <button type="button" class="btn btn-outline-secondary"
-                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                name="btnPesquisar"
-                                (click)="salvar()"
-                                >
-                                Salvar
-                            </button>
-                            <label for="btnVoltar" class="form-label">&nbsp;</label>
-                            <button type="button" class="btn btn-outline-secondary"
-                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                name="btnPesquisar"
-                                (click)="voltar()"
-                                >
-                                Voltar
-                            </button>
-                        </div>
+                                <div class="col-md-7">
+                                    <label for="nome">Categoria:</label>
+                                    <select style="margin: 0px 0px 10px 0px;" class="form-control custom-border"
+                                        name="tipoTarefa" [(ngModel)]="tarefa.tipoTarefa" required>
+                                        <option *ngFor="let tipo of tiposTarefa" [ngValue]="tipo">{{ tipo }}</option>
+                                    </select>
+                                </div>
+                                <!--Campo de seleção de usuário, mostrado apenas em Nova tarefa -->
+                                <!--Fim do campo de seleção de usuário 
+                             Condição para exibir checkboxes adicionais apenas na edição -->
+                                <div *ngIf="idTarefa">
+                                    <!-- Checkboxes adicionais para edição -->
+                                    <div class="col-md-5">
+                                        <label>Status:</label><br>
+                                        <label>
+                                            <input type="checkbox" name="statusConcluido"
+                                                [(ngModel)]="tarefa.realizado">
+                                            Concluído
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Fim da condição para edição -->
+                                <!--  -->
+                                <div class="row"  id="btn">
+                                    <div class="col-md-16 form-group">
+                                        <label for="btnPesquisar" class="form-label">&nbsp;</label>
+                                        <button  type="button" class="btn btn-outline-secondary"
+                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                            name="btnPesquisar" (click)="salvar()">
+                                            Salvar
+                                        </button>
+                                        <label for="btnVoltar" class="form-label">&nbsp;</label>
+                                        <button  type="button" class="btn btn-outline-secondary"
+                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                            name="btnPesquisar" (click)="voltar()">
+                                            Voltar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
+</div>

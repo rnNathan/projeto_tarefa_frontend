@@ -109,7 +109,7 @@ export class TarefaDetalheComponent implements OnInit {
   }
 
   public voltar() {
-    this.router.navigate(['/tarefa/lista']);
+    this.router.navigate(['/home/']);
   }
 
   private consultarTodosUsuarios() {
