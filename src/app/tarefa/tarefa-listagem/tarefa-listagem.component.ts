@@ -20,6 +20,7 @@ import { ItemTarefa } from '../../shared/model/itemTarefa';
   styleUrl: './tarefa-listagem.component.scss'
 })
 export class TarefaListagemComponent implements OnInit{
+[x: string]: any;
 
   public usuario: Usuario = new Usuario();
   public tarefas: Tarefa[] = new Array();
@@ -39,7 +40,7 @@ export class TarefaListagemComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    
+
   }
 
   private consultarTodasTarefas() {
@@ -58,7 +59,7 @@ export class TarefaListagemComponent implements OnInit{
     if (usuarioNoStorage) {
       const usuarioAutenticado = JSON.parse(usuarioNoStorage);
       this.seletor.idUsuario = usuarioAutenticado.idUsuario; // Atribuindo o id do usuário no filtro.
-    } 
+    }
     this.tarefaService.consultarPorFiltro(this.seletor).subscribe(
       (resultado) => {
         this.tarefas = resultado;
@@ -139,8 +140,16 @@ export class TarefaListagemComponent implements OnInit{
     });
   }
 
+  public realizar(tarefaRealizada: Tarefa){
+
+  }
+
   public alterarItem(item: ItemTarefa) {
     this.router.navigate(['/item/detalhe/', item]);
+  }
+
+  public alterarStatus(tarefaRealizada: Tarefa) {
+    this.tarefaService.alterar(tarefaRealizada);
   }
 
 }

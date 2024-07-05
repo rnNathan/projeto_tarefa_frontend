@@ -5,17 +5,8 @@ import { LoginCadastroComponent } from './login-cadastro/login-cadastro.componen
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent,
-
-    children: [
-        { path: 'home',
-             loadChildren: () =>
-             import('../home/home.module').then((m) => m.HomeModule)
-           }
-         ]
-   }
-  
-
+  {path: '', component: LoginComponent},
+  {path: 'cadastro', component: LoginCadastroComponent},
 ];
 
 @NgModule({

@@ -18,7 +18,7 @@ export class LoginComponent {
   public dto: UsuarioDTO = new UsuarioDTO();
 
 
-  constructor(private loginService: LoginService, 
+  constructor(private loginService: LoginService,
               private router: Router){
   }
 

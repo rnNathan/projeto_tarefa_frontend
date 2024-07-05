@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +13,8 @@ import { ItemRoutingModule } from './item-routing.module';
   imports: [
     CommonModule,
     FormsModule,
-    ItemRoutingModule
+    ItemRoutingModule,
+    SharedModule
   ]
 })
 

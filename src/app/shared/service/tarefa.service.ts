@@ -55,5 +55,5 @@ export class TarefaService {
   public contarPaginas(seletor: TarefaSeletor):Observable<number> {
     return this.httpClient.post<number>(this.API + '/contar-pagina', seletor);
   }
-  
+
 }

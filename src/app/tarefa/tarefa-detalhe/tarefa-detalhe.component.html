@@ -14,7 +14,7 @@
                             </div>
                             <div class="row" style="flex-direction: column; margin: 10px 0px 0px 0px;">
                                 <div class="col-md-7">
-                                    <label for="nome" >Nome da tarefa:</label>
+                                    <label for="nome">Nome da tarefa:</label>
                                     <input style="margin: 0px 0px 10px 0px;" [ngClass]="validarNome()" type="text"
                                         id="nome" class="form-control custom-border" minlength="5" name="nomeTarefa"
                                         [(ngModel)]="tarefa.nomeTarefa" required />
@@ -28,7 +28,7 @@
                                     </select>
                                 </div>
                                 <!--Campo de seleção de usuário, mostrado apenas em Nova tarefa -->
-                                <!--Fim do campo de seleção de usuário 
+                                <!--Fim do campo de seleção de usuário
                              Condição para exibir checkboxes adicionais apenas na edição -->
                                 <div *ngIf="idTarefa">
                                     <!-- Checkboxes adicionais para edição -->
