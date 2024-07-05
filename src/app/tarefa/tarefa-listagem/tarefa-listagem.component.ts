@@ -4,7 +4,7 @@ import { TarefaSeletor } from '../../shared/model/seletor/tarefaSeletor';
 import { TarefaService } from '../../shared/service/tarefa.service';
 import { UsuarioService } from '../../shared/service/usuario.service';
 import { ItemTarefaService } from '../../shared/service/itemTarefa.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Usuario } from '../../shared/model/usuario';
 import { TarefaTemplateDTO } from '../../shared/model/DTO/TarefaTemplateDTO';
@@ -20,8 +20,6 @@ import { ItemTarefa } from '../../shared/model/itemTarefa';
   styleUrl: './tarefa-listagem.component.scss'
 })
 export class TarefaListagemComponent implements OnInit{
-[x: string]: any;
-
   public usuario: Usuario = new Usuario();
   public tarefas: Tarefa[] = new Array();
   public idTarefa: number;
@@ -30,19 +28,53 @@ export class TarefaListagemComponent implements OnInit{
   public readonly TAMANHO_PAGINA: number = 0;
   public showForm: boolean = false;
   public isTemplate: boolean = false;
-  itemTarefa: ItemTarefa;
+  public tarefa: Tarefa = new Tarefa();
+  public novoItem: ItemTarefa = new ItemTarefa();
 
   constructor(
     private tarefaService: TarefaService,
-    private usuarioService: UsuarioService,
     private itemTarefaService: ItemTarefaService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute
+
+  ) { }
 
   ngOnInit(): void {
 
+    this.seletor.limite = this.TAMANHO_PAGINA;
+    this.seletor.pagina = 1;
+    this.pesquisar();
   }
 
+  public adicionarItem(tarefa: Tarefa): void {
+    tarefa.criandoItem = true;
+  }
+
+  public salvarItem(idTarefa: number): void {
+    this.novoItem.idTarefa = idTarefa;
+    this.itemTarefaService.inserir(this.novoItem).subscribe(
+      (resposta) => {
+        this.novoItem = resposta;
+        Swal.fire('Item salvo com sucesso!', '', 'success');
+        this.novoItem.descricao = '';
+        this.pesquisar();
+      },
+      (erro) => {
+        Swal.fire('Erro ao salvar um item!', erro, 'error');
+      }
+    );
+  }
+
+  public buscarItem(): void {
+    this.itemTarefaService.consultarPorId(this.novoItem.idItem).subscribe(
+      (item) => {
+        this.novoItem = item;
+      },
+      (erro) => {
+        Swal.fire('Erro ao buscar um item!', erro, 'error');
+      }
+    );
+  }
   private consultarTodasTarefas() {
     this.tarefaService.consultarTodos().subscribe(
       (resultado) => {
@@ -53,13 +85,14 @@ export class TarefaListagemComponent implements OnInit{
       }
     );
   }
-
   public pesquisar() {
+
     const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
     if (usuarioNoStorage) {
       const usuarioAutenticado = JSON.parse(usuarioNoStorage);
-      this.seletor.idUsuario = usuarioAutenticado.idUsuario; // Atribuindo o id do usuário no filtro.
-    }
+      this.seletor.idUsuario = usuarioAutenticado.idUsuario; 
+    } 
+    console.log(this.seletor.idUsuario);
     this.tarefaService.consultarPorFiltro(this.seletor).subscribe(
       (resultado) => {
         this.tarefas = resultado;
@@ -69,7 +102,6 @@ export class TarefaListagemComponent implements OnInit{
       }
     );
   }
-
   public limpar() {
     this.seletor = new TarefaSeletor();
   }
@@ -112,7 +144,6 @@ export class TarefaListagemComponent implements OnInit{
   toggleExpanded(tarefa: Tarefa): void {
     tarefa.expanded = !tarefa.expanded;
   }
-
   public excluirItem(itemSelecionado: ItemTarefa) {
     Swal.fire({
       title: 'Deseja excluir este Item?',
@@ -139,13 +170,42 @@ export class TarefaListagemComponent implements OnInit{
       }
     });
   }
-
-  public realizar(tarefaRealizada: Tarefa){
-
-  }
-
+  
   public alterarItem(item: ItemTarefa) {
     this.router.navigate(['/item/detalhe/', item]);
+  }
+
+  public contarPaginas() {
+    this.tarefaService.contarPaginas(this.seletor).subscribe(
+      resultado => {
+        this.totalPaginas = resultado;
+      },
+      erro => {
+        Swal.fire('Erro ao consultar total de páginas', erro.error.mensagem, 'error');
+      }
+    );
+  }
+  atualizarPaginacao() {
+    this.contarPaginas();
+    this.pesquisar();
+  }
+
+  avancarPagina() {
+    this.seletor.pagina++;
+    this.pesquisar();
+  }
+
+  voltarPagina() {
+    this.seletor.pagina--;
+    this.pesquisar();
+  }
+
+  irParaPagina(indicePagina: number) {
+    this.seletor.pagina = indicePagina;
+    this.pesquisar();
+  }
+  criarArrayPaginas(): any[] {
+    return Array(this.totalPaginas).fill(0).map((x, i) => i + 1);
   }
 
   public alterarStatus(tarefaRealizada: Tarefa) {

@@ -56,14 +56,6 @@ export class TarefaDetalheComponent implements OnInit {
     }
   }
 
-  private getUsuarioId(): number {
-    // Implemente a lógica para obter o id do usuário
-    // Pode ser de um serviço de autenticação, ou de outra fonte
-    const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
-
-    return 1; // Exemplo: substitua isso pela lógica real
-  }
-
   public inserir(): void {
     const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
     if (usuarioNoStorage) {
