@@ -68,15 +68,14 @@
           </div>
         </div>
         <div style="background-color: #f2f7ff; font-size: medium; padding-left: 15px; font-style: italic;">
-          <li class="list-group-item" >Tipo: {{ tarefa.tipoTarefa }}
-          </li>
+          <li class="list-group-item" style="padding: 10px 0px 20px 0px;">Tipo: {{ tarefa.tipoTarefa }}</li>
           <li class="list-group-item rounded" *ngFor="let itens of tarefa.itensTarefa">
+            <input type="checkbox" [(ngModel)]="itens.realizado" >
             {{ itens.descricao }}
-            <button class="btn btn-sm " (click)="excluirItem(itens)">
+            <button class="btn btn-sm" (click)="excluirItem(itens)">
               <i class="bi bi-ban" style="color: red;"></i>
             </button>
           </li>
-
         </div>
         <div class="card-body">
           <li class="list-group-item">
