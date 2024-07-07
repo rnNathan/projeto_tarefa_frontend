@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 .fullscreen-container {
-    background-color: #c4e7ff;
-    height: 100%; /* Altura da tela inteira */
-    width:  100%; /* Largura da tela inteira */
+  background: linear-gradient(90deg, rgba(171,241,255,1) 13%, rgb(85, 193, 243) 31%, rgb(85, 193, 243) 64%, rgba(171,241,255,1) 92%);
+  height: 100%; /* Altura da tela inteira */
+  width:  100%; /* Largura da tela inteira */
 
 
   }
@@ -12,7 +12,7 @@
 
 /* Define a cor de fundo para o corpo da página */
 body {
-  background-color: rgb(196, 231, 255); /* substitua pela cor desejada */
+  background: linear-gradient(90deg, rgba(171,241,255,1) 13%, rgb(85, 193, 243) 31%, rgb(85, 193, 243) 64%, rgba(171,241,255,1) 92%); /* substitua pela cor desejada */
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@ body {
 .header, .main, .footer {
   padding: 20px;
   margin-bottom: 10px;
-  background-color: #2980b9;
+  background: linear-gradient(90deg, rgba(171,241,255,1) 13%, rgb(85, 193, 243) 31%, rgb(85, 193, 243) 64%, rgba(171,241,255,1) 92%);
   border-radius: 8px;
 }
 

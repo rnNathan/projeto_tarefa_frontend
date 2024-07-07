@@ -65,7 +65,6 @@ export class TarefaListagemComponent implements OnInit {
   public confirmarTarefa(tarefa: Tarefa): void {
     this.tarefaService.alterar(tarefa).subscribe(
       (resposta) => {
-        Swal.fire('Tarefa atualizada com sucesso!', '', 'success');
         this.pesquisar();
       },
       (erro) => {
