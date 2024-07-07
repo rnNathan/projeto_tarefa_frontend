@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+.fullscreen-container {
+    background-color: #c4e7ff;
+    height: 100%; /* Altura da tela inteira */
+    width:  100%; /* Largura da tela inteira */
+
+
+  }
+
+
+/* styles.css */
+
+/* Define a cor de fundo para o corpo da página */
+body {
+  background-color: rgb(196, 231, 255); /* substitua pela cor desejada */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #ffffff; /* cor do texto para contraste */
+}
+
+/* Tornar a página responsiva */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Exemplo de layout responsivo */
+.header, .main, .footer {
+  padding: 20px;
+  margin-bottom: 10px;
+  background-color: #2980b9;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .header, .main, .footer {
+    padding: 15px;
+    margin-bottom: 8px;
+  }
+}

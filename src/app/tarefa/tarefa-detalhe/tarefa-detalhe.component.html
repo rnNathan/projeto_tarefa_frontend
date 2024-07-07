@@ -2,7 +2,8 @@
 <div class="fullscreen-container">
     <div class="container" style="display: flex; justify-content: center;">
         <div class="card mb-3" style="max-width: 1000px; margin-top: 200px;">
-            <div class="row g-0">
+            <p class="fonte"  style=" padding: 10px 0px 0px 0px;color: rgb(90, 167, 255); justify-content: center; display: flex; font-size: 30px;">Cadastrar Tarefa</p>
+            <div class="row g-0"> 
                 <div class="col-md-4">
                     <img src="./assets/add.jpg" class="img-fluid rounded-start rounded-end" alt="imagemlogin">
                 </div>
@@ -10,7 +11,9 @@
                     <div class="card-body">
                         <form #ngForm="ngForm" style=" box-shadow: 10px 10px 5px #71a9d6;">
                             <div class="position-relative">
-                                <button id="btnClose" type="button" class="position-absolute top-0 end-0 btn-close" aria-label="Close" style="outline: none;padding: 15px; box-shadow: none;" (click)="voltar()"></button>
+                                <button id="btnClose" type="button" class="position-absolute top-0 end-0 btn-close"
+                                    aria-label="Close" style="outline: none;padding: 15px; box-shadow: none;"
+                                    (click)="voltar()"></button>
                             </div>
                             <div class="row" style="flex-direction: column; margin: 10px 0px 0px 0px;">
                                 <div class="col-md-7">
@@ -22,8 +25,9 @@
 
                                 <div class="col-md-7">
                                     <label for="nome">Categoria:</label>
-                                    <select style="margin: 0px 0px 10px 0px;" class="form-control custom-border"
-                                        name="tipoTarefa" [(ngModel)]="tarefa.tipoTarefa" required>
+                                    <select style="margin: 0px 0px 10px 0px;"
+                                        class="form-control custom-border form-select" name="tipoTarefa"
+                                        [(ngModel)]="tarefa.tipoTarefa" required>
                                         <option *ngFor="let tipo of tiposTarefa" [ngValue]="tipo">{{ tipo }}</option>
                                     </select>
                                 </div>
@@ -33,26 +37,27 @@
                                 <div *ngIf="idTarefa">
                                     <!-- Checkboxes adicionais para edição -->
                                     <div class="col-md-5">
-                                        <label>Status:</label><br>
+                                        <label>Salvar tarefa como template:</label><br>
                                         <label>
+                                            <pre>{{tarefa | json }}</pre>
                                             <input type="checkbox" name="statusConcluido"
-                                                [(ngModel)]="tarefa.realizado">
-                                            Concluído
+                                                [(ngModel)]="tarefa.isTemplate">
+                                            Salvar
                                         </label>
                                     </div>
                                 </div>
                                 <!-- Fim da condição para edição -->
                                 <!--  -->
-                                <div class="row"  id="btn">
+                                <div class="row" id="btn">
                                     <div class="col-md-16 form-group">
                                         <label for="btnPesquisar" class="form-label">&nbsp;</label>
-                                        <button  type="button" class="btn btn-outline-secondary"
+                                        <button type="button" class="btn btn-outline-secondary"
                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                             name="btnPesquisar" (click)="salvar()">
                                             Salvar
                                         </button>
                                         <label for="btnVoltar" class="form-label">&nbsp;</label>
-                                        <button  type="button" class="btn btn-outline-secondary"
+                                        <button type="button" class="btn btn-outline-secondary"
                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                             name="btnPesquisar" (click)="voltar()">
                                             Voltar

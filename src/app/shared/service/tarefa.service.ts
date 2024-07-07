@@ -56,4 +56,8 @@ export class TarefaService {
     return this.httpClient.post<number>(this.API + '/contar-pagina', seletor);
   }
 
+  public concluirTarefa(tarefa: Tarefa):Observable<Tarefa> {
+    return this.httpClient.put<Tarefa>(this.API + '/concluir', tarefa)
+  }
+
 }

@@ -78,7 +78,7 @@ export class TarefaDetalheComponent implements OnInit {
     this.tarefaService.alterar(this.tarefa).subscribe(
       (resposta) => {
         Swal.fire('Tarefa atualizada com sucesso!', '', 'success');
-        this.voltar();
+        this.router.navigate(['/tarefa/lista']);
       },
       (erro) => {
         Swal.fire(
@@ -101,7 +101,7 @@ export class TarefaDetalheComponent implements OnInit {
   }
 
   public voltar() {
-    this.router.navigate(['/home/']);
+    this.router.navigate(['/tarefa/lista']);
   }
 
   private consultarTodosUsuarios() {

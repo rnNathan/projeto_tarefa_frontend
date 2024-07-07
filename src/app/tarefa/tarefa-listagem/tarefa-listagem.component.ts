@@ -15,11 +15,11 @@ import { ItemTarefa } from '../../shared/model/itemTarefa';
 @Component({
   selector: 'app-tarefa-listagem',
   //standalone: true,
- //imports: [],
+  //imports: [],
   templateUrl: './tarefa-listagem.component.html',
   styleUrl: './tarefa-listagem.component.scss'
 })
-export class TarefaListagemComponent implements OnInit{
+export class TarefaListagemComponent implements OnInit {
   public usuario: Usuario = new Usuario();
   public tarefas: Tarefa[] = new Array();
   public idTarefa: number;
@@ -50,12 +50,35 @@ export class TarefaListagemComponent implements OnInit{
     tarefa.criandoItem = true;
   }
 
+  public itemCheckboxChange(item: ItemTarefa): void {
+    this.itemTarefaService.alterar(item).subscribe(
+      (resposta) => {
+      },
+      (erro) => {
+        Swal.fire('Erro ao atualizar o item: ' + erro.error.mensagem, 'error');
+      }
+    );
+  }
+  
+
+
+  public confirmarTarefa(tarefa: Tarefa): void {
+    this.tarefaService.alterar(tarefa).subscribe(
+      (resposta) => {
+        Swal.fire('Tarefa atualizada com sucesso!', '', 'success');
+        this.pesquisar();
+      },
+      (erro) => {
+        Swal.fire('Erro ao atualizar a tarefa: ' + erro.error.mensagem, 'error');
+      }
+    );
+  }
+
   public salvarItem(idTarefa: number): void {
     this.novoItem.idTarefa = idTarefa;
     this.itemTarefaService.inserir(this.novoItem).subscribe(
       (resposta) => {
         this.novoItem = resposta;
-        Swal.fire('Item salvo com sucesso!', '', 'success');
         this.novoItem.descricao = '';
         this.pesquisar();
       },
@@ -90,8 +113,8 @@ export class TarefaListagemComponent implements OnInit{
     const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
     if (usuarioNoStorage) {
       const usuarioAutenticado = JSON.parse(usuarioNoStorage);
-      this.seletor.idUsuario = usuarioAutenticado.idUsuario; 
-    } 
+      this.seletor.idUsuario = usuarioAutenticado.idUsuario;
+    }
     console.log(this.seletor.idUsuario);
     this.tarefaService.consultarPorFiltro(this.seletor).subscribe(
       (resultado) => {
@@ -157,7 +180,6 @@ export class TarefaListagemComponent implements OnInit{
         this.itemTarefaService.excluir(itemSelecionado.idItem).subscribe(
           (resultado) => {
             this.pesquisar();
-            Swal.fire('Sucesso!', 'Item excluída com sucesso! ', 'success');
           },
           (erro) => {
             Swal.fire(
@@ -170,7 +192,7 @@ export class TarefaListagemComponent implements OnInit{
       }
     });
   }
-  
+
   public alterarItem(item: ItemTarefa) {
     this.router.navigate(['/item/detalhe/', item]);
   }
