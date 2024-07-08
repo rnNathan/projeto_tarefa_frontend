@@ -8,6 +8,7 @@ import { UsuarioService } from '../../shared/service/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { TarefaTemplateDTO } from '../../shared/model/DTO/TarefaTemplateDTO';
+import { TarefaSeletor } from '../../shared/model/seletor/tarefaSeletor';
 
 @Component({
   selector: 'app-template-cadastro',
@@ -27,6 +28,7 @@ export class TemplateCadastroComponent {
   public novaTarefa: Tarefa = new Tarefa();
   public listaTemplates: Array<Tarefa> = new Array();
   public tarefaDTO: TarefaTemplateDTO = new TarefaTemplateDTO();
+  public seletor: TarefaSeletor = new TarefaSeletor();
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
@@ -51,31 +53,6 @@ export class TemplateCadastroComponent {
 
   }
 
-  public salvar(): void {
-    if (this.idTarefa) {
-      this.alterar();
-    } else {
-      this.inserir();
-    }
-  }
-
-  public inserir(): void {
-    const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
-    if (usuarioNoStorage) {
-      const usuarioAutenticado = JSON.parse(usuarioNoStorage);
-      this.tarefa.idUsuario = usuarioAutenticado.idUsuario; // Atribuindo o id do usuário na tarefa.
-      this.tarefaService.inserir(this.tarefa).subscribe(
-        (resposta) => {
-          this.tarefa = resposta;
-          Swal.fire('Tarefa salva com sucesso!', '', 'success');
-          this.router.navigate(['/tarefa/lista']);
-        },
-        (erro) => {
-          Swal.fire('Erro ao salvar uma tarefa!', erro, 'error');
-        }
-      );
-    }
-  }
 
   public alterar(): void {
     this.tarefaService.alterar(this.tarefa).subscribe(
@@ -107,11 +84,11 @@ export class TemplateCadastroComponent {
     this.router.navigate(['/tarefa/lista']);
   }
 
-  validarNome(){
+  validarNome() {
     let estiloInput = 'form-control';
 
-    if(this.ngForm && this.ngForm.invalid){
-      if(this.tarefa.nomeTarefa != null && this.tarefa.nomeTarefa.length < 3){
+    if (this.ngForm && this.ngForm.invalid) {
+      if (this.tarefa.nomeTarefa != null && this.tarefa.nomeTarefa.length < 3) {
         estiloInput = 'form-control is-invalid';
       }
     }
@@ -119,19 +96,24 @@ export class TemplateCadastroComponent {
   }
 
   public listaTemplate() {
-    this.tarefaService.listaTemplate().subscribe(
-      (resposta) => {
-        this.listaTemplates = resposta;
-      }
-    )
+    const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
+    if (usuarioNoStorage) {
+      const usuarioAutenticado = JSON.parse(usuarioNoStorage);
+      this.seletor.idUsuario = usuarioAutenticado.idUsuario; // Atribuindo o id do usuário na tarefa.
+      this.tarefaService.listaTemplate().subscribe(
+        (resposta) => {
+          this.listaTemplates = resposta;
+        }
+      )
+    }
   }
 
   public criarTarefaAPartirDeTemplate() {
-      this.tarefaService.criarTarefaAPartirDeTemplate(this.tarefaDTO).subscribe(
+    this.tarefaService.criarTarefaAPartirDeTemplate(this.tarefaDTO).subscribe(
       (resposta) => {
         this.tarefa = resposta;
         Swal.fire('Tarefa salva com sucesso!', '', 'success');
-          this.router.navigate(['/tarefa/lista']);
+        this.router.navigate(['/tarefa/lista']);
       }
     )
   }

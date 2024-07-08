@@ -15,7 +15,7 @@
           <label for="nome">Categoria:</label>
           <select style="margin: 0px 0px 10px 0px; border-color:#69aaff;"
               class="form-control custom-border form-select" name="tipoTarefa"
-              [(ngModel)]="tarefa.tipoTarefa" required>
+              [(ngModel)]="seletor.tipoTarefa" required>
               <option *ngFor="let tipo of tiposTarefa" [ngValue]="tipo">{{ tipo }}</option>
           </select>
       </div>

@@ -114,7 +114,6 @@ export class TarefaListagemComponent implements OnInit {
     );
   }
   public pesquisar() {
-
     const usuarioNoStorage = localStorage.getItem('usuarioAutenticado');
     if (usuarioNoStorage) {
       const usuarioAutenticado = JSON.parse(usuarioNoStorage);
