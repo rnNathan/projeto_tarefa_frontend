@@ -5,8 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { TarefaRoutingModule } from './tarefa-routing.module';
 import { TarefaDetalheComponent } from './tarefa-detalhe/tarefa-detalhe.component';
 import { SharedModule } from '../shared/shared.module';
-import { RodapeComponent } from '../shared/components/rodape/rodape.component';
-
 
 @NgModule({
   declarations: [

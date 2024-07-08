@@ -18,7 +18,7 @@ export class ItemDetalheComponent implements OnInit{
   public idItem: number;
   public item: ItemTarefa = new ItemTarefa();
   public tarefas: Array<Tarefa> = new Array();
-  
+
 
   constructor(
     private router: Router, // COMPONENTE PARA FAZER ROTEAMENTO ENTRA AS TELAS
@@ -34,8 +34,6 @@ export class ItemDetalheComponent implements OnInit{
         this.buscarItem();
       }
     });
-
-
     this.consultarTodosItens();
   }
 

@@ -60,4 +60,7 @@ export class TarefaService {
     return this.httpClient.put<Tarefa>(this.API + '/concluir', tarefa)
   }
 
+  public listaTemplate():Observable<Array<Tarefa>> {
+    return this.httpClient.get<Array<Tarefa>>(this.API + '/contar-template')
+  }
 }

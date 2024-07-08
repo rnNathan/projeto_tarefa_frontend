@@ -42,7 +42,7 @@ export class UsuarioDadosComponent implements OnInit {
   alterar(): void {
     console.log('erro no alterar.')
     this.usuarioService.alterar(this.usuario).subscribe(
-      resultado => {
+      resposta => {
         Swal.fire('Usuário atualizado com sucesso!', '', 'success');
         this.router.navigate(['/tarefa/lista']);
       },

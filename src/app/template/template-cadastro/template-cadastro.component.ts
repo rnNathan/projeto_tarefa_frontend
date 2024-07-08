@@ -1,21 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ItemTarefa } from '../../shared/model/itemTarefa';
 import { Tarefa } from '../../shared/model/tarefa';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TarefaService } from '../../shared/service/tarefa.service';
-import { UsuarioService } from '../../shared/service/usuario.service';
-import Swal from 'sweetalert2';
 import { Usuario } from '../../shared/model/usuario';
 import { NgForm } from '@angular/forms';
+import { TarefaService } from '../../shared/service/tarefa.service';
+import { UsuarioService } from '../../shared/service/usuario.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { TarefaTemplateDTO } from '../../shared/model/DTO/TarefaTemplateDTO';
 
 @Component({
-  selector: 'app-tarefa-listagem',
+  selector: 'app-template-cadastro',
   //standalone: true,
   //imports: [],
-  templateUrl: './tarefa-detalhe.component.html',
-  styleUrl: './tarefa-detalhe.component.scss'
+  templateUrl: './template-cadastro.component.html',
+  styleUrl: './template-cadastro.component.scss'
 })
-export class TarefaDetalheComponent implements OnInit {
+
+export class TemplateCadastroComponent {
 
   public itens: ItemTarefa[] = new Array();
   public itemTarefa: ItemTarefa = new ItemTarefa();
@@ -23,6 +25,8 @@ export class TarefaDetalheComponent implements OnInit {
   public idTarefa: number;
   public usuarios: Array<Usuario> = new Array();
   public novaTarefa: Tarefa = new Tarefa();
+  public listaTemplates: Array<Tarefa> = new Array();
+  public tarefaDTO: TarefaTemplateDTO = new TarefaTemplateDTO();
 
   @ViewChild('ngForm')
   public ngForm: NgForm;
@@ -32,7 +36,6 @@ export class TarefaDetalheComponent implements OnInit {
   constructor(
     private tarefaService: TarefaService,
     private router: Router, // COMPONENTE PARA FAZER ROTEAMENTO ENTRA AS TELAS
-    private usuarioService: UsuarioService,
     private route: ActivatedRoute //PEGAR OS PARAMETROS DA URL
   ) { }
 
@@ -43,6 +46,9 @@ export class TarefaDetalheComponent implements OnInit {
         this.buscarTarefa();
       }
     });
+
+    this.listaTemplate();
+
   }
 
   public salvar(): void {
@@ -78,8 +84,10 @@ export class TarefaDetalheComponent implements OnInit {
         this.router.navigate(['/tarefa/lista']);
       },
       (erro) => {
-        console.log('Erro:' + erro)
-        Swal.fire('Erro', erro.error.mensagem, 'error')
+        Swal.fire(
+          'Erro ao atualizar a tarefa: ' + erro.error.mensagem,
+          'error'
+        );
       }
     );
   }
@@ -99,17 +107,6 @@ export class TarefaDetalheComponent implements OnInit {
     this.router.navigate(['/tarefa/lista']);
   }
 
-  /*private consultarTodosUsuarios() {
-    this.usuarioService.consultarTodos().subscribe(
-    (resposta) => {
-      this.usuarios = resposta;
-    },
-    (erro) => {
-      Swal.fire('Erro ao consultar todos usuários', '', 'error');
-    }
-  )
-  }*/
-
   validarNome(){
     let estiloInput = 'form-control';
 
@@ -118,7 +115,27 @@ export class TarefaDetalheComponent implements OnInit {
         estiloInput = 'form-control is-invalid';
       }
     }
-
     return estiloInput;
   }
+
+  public listaTemplate() {
+    this.tarefaService.listaTemplate().subscribe(
+      (resposta) => {
+        this.listaTemplates = resposta;
+      }
+    )
+  }
+
+  public criarTarefaAPartirDeTemplate() {
+      this.tarefaService.criarTarefaAPartirDeTemplate(this.tarefaDTO).subscribe(
+      (resposta) => {
+        this.tarefa = resposta;
+        Swal.fire('Tarefa salva com sucesso!', '', 'success');
+          this.router.navigate(['/tarefa/lista']);
+      }
+    )
+  }
 }
+
+
+

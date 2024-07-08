@@ -2,7 +2,7 @@
 <div class="fullscreen-container">
     <div class="container" style="display: flex; justify-content: center;">
         <div class="card mb-3" style="max-width: 1000px; margin-top: 200px;">
-            <p class="fonte"  style=" padding: 10px 0px 0px 0px;color: rgb(90, 167, 255); justify-content: center; display: flex; font-size: 30px;">Cadastrar Tarefa</p>
+            <h6 class="fonte"  style=" padding: 10px 0px 0px 0px;color: rgb(90, 167, 255); justify-content: center; display: flex; font-size: 30px;">Cadastrar Tarefa<p style="color: rgb(69, 69, 248); padding-left: 7px;">Template</p></h6>
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="./assets/add.jpg" class="img-fluid rounded-start rounded-end" alt="imagemlogin">
@@ -20,15 +20,15 @@
                                     <label for="nome">Nome da tarefa:</label>
                                     <input style="margin: 0px 0px 10px 0px;" [ngClass]="validarNome()" type="text"
                                         id="nome" class="form-control custom-border" minlength="5" name="nomeTarefa"
-                                        [(ngModel)]="tarefa.nomeTarefa" required />
+                                        [(ngModel)]="tarefaDTO.nomeNovaTarefa" required />
                                 </div>
                                 <div class="col-md-7">
                                     <label for="nome">Categoria:</label>
-                                    <select style="margin: 0px 0px 10px 0px;"
-                                        class="form-control custom-border form-select" name="tipoTarefa"
-                                        [(ngModel)]="tarefa.tipoTarefa" required>
-                                        <option *ngFor="let tipo of tiposTarefa" [ngValue]="tipo">{{ tipo }}</option>
-                                    </select>
+                                    <select class="form-control" name="categoria" [(ngModel)]="tarefaDTO.idTarefaTemplate" required>
+                                      @for (dto of listaTemplates; track dto.idTarefa) {
+                                      <option [ngValue]="dto.idTarefa">{{ dto.nomeTarefa }}</option>
+                                      }
+                                  </select>
                                 </div>
                                 <!--Campo de seleção de usuário, mostrado apenas em Nova tarefa -->
                                 <!--Fim do campo de seleção de usuário
@@ -51,7 +51,7 @@
                                         <label for="btnPesquisar" class="form-label">&nbsp;</label>
                                         <button type="button" class="btn btn-outline-secondary"
                                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                            name="btnPesquisar" (click)="salvar()">
+                                            name="btnPesquisar" (click)="criarTarefaAPartirDeTemplate()">
                                             Salvar
                                         </button>
                                         <label for="btnVoltar" class="form-label">&nbsp;</label>

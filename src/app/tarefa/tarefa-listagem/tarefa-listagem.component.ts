@@ -19,6 +19,9 @@ import { ItemTarefa } from '../../shared/model/itemTarefa';
   templateUrl: './tarefa-listagem.component.html',
   styleUrl: './tarefa-listagem.component.scss'
 })
+
+
+
 export class TarefaListagemComponent implements OnInit {
   public usuario: Usuario = new Usuario();
   public tarefas: Tarefa[] = new Array();
@@ -38,6 +41,9 @@ export class TarefaListagemComponent implements OnInit {
     private route: ActivatedRoute
 
   ) { }
+
+
+  public tiposTarefa: string[] = ['Estudar', 'Rancho', 'Compra semanal', 'Exercício', 'Diários'];
 
   ngOnInit(): void {
 
@@ -59,7 +65,7 @@ export class TarefaListagemComponent implements OnInit {
       }
     );
   }
-  
+
 
 
   public confirmarTarefa(tarefa: Tarefa): void {

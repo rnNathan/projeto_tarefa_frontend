@@ -12,10 +12,6 @@ export const routes: Routes = [
       loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
    },
    {
-      path: 'test',
-      loadChildren: () => import('./test/test.module').then(m => m.TestModule)
-   },
-   {
       path: 'tarefa',
       loadChildren: () => import('./tarefa/tarefa.module').then(m => m.TarefaModule)
    },
@@ -27,5 +23,9 @@ export const routes: Routes = [
       path: 'usuario',
       loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule)
    },
+   {
+    path: 'template',
+    loadChildren: () => import('./template/template.module').then(m => m.TemplateModule)
+ },
 ];
 
